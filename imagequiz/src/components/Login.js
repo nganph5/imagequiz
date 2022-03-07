@@ -4,7 +4,7 @@ import local_temp_store from '../data_access_layer/local_temp_storage';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+function Login(props) {
   const [email, setEmail] = useState('');
   const [passwd, setPass] = useState('');
   const navigate = useNavigate();
@@ -22,6 +22,7 @@ const Login = () => {
     let found = local_temp_store.customers.find(x => 
       (x.email.toLowerCase() === email.toLowerCase() && x.passwd === passwd));
     if (found) {
+      props.customerLoggedIn(email);
       navigate("/");
     }else{
       alert("Invalid credentials!");
@@ -40,7 +41,7 @@ const Login = () => {
           <Form.Control type="password" placeholder="Enter Password" value={passwd} onChange={onPassChanged}/>
         </Form.Group>
 
-        <Button variant="primary" type="submit">Submit</Button>
+        <Button variant="danger" type="submit">Submit</Button>
     </Form>
   );
 }

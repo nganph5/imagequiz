@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import local_temp_store from '../data_access_layer/local_temp_storage';
 
 
-const Register = () => {
+function Register() {
   const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [passwd, setPass] = useState('');
@@ -46,7 +46,7 @@ const Register = () => {
             <Form.Control type="password" placeholder="Enter Password" value={passwd} onChange={onPassChanged}/>
           </Form.Group>
 
-          <Button variant="primary" type="submit">Submit</Button>  
+          <Button variant="danger" type="submit">Submit</Button>  
       </Form>
     );
 }

@@ -1,8 +1,10 @@
-const Header = () => {
+function Header() {
   return(
-       <div>
-        This is the header.
-      </div>    
+     <div style={{backgroundColor: "maroon", color: "pink", height: "30px"}}>
+        <div style={{marginLeft: "20px"}}>
+          IMAGE QUIZZ
+        </div>
+      </div>
   );
 }
 

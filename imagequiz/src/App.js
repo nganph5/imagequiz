@@ -9,11 +9,15 @@ import Login from './components/Login';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Menu from './components/Menu';
+import { useState } from 'react';
 
-const App = () => {
-  // let customerLoginHandler = () => {
+function App() {
 
-  // }
+  const [customer, setCustomer] = useState('');
+
+  let customerLoggedInHandler = (customerEmail) => {
+    setCustomer(customerEmail);
+  }
 
   return (
     <HashRouter>
@@ -26,14 +30,14 @@ const App = () => {
 
         <Row>
           <Col>
-          <Menu/>
+          <Menu customer={customer} />
           </Col>
         </Row>
 
         <Routes>  
           <Route exact path="/register" element={<Register />}></Route>
           
-          <Route exact path="/login" element={<Login />}></Route>
+          <Route exact path="/login" element={<Login customerLoggedIn={customerLoggedInHandler}/>}></Route>
           
           <Route exact path="/" element={<Home />}></Route>
         </Routes>
