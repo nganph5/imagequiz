@@ -1,9 +1,13 @@
-const Login = () =>{
-  return(
-    <div>
-      Hello from the login page!
-    </div>
-  );
-}
+import React, { Component } from 'react';
 
-export default Login;
+export default class Login extends Component {
+  render(){
+    return(
+      <React.Fragment>
+         <div>
+          LOGIN
+        </div>
+      </React.Fragment>     
+    );
+  }
+}

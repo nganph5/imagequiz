@@ -1,9 +1,13 @@
-const Footer = () =>{
-  return(
-    <div>
-      FOOTER
-    </div>
-  );
-}
+import React, { Component } from 'react';
 
-export default Footer;
+export default class Footer extends Component {
+  render(){
+    return(
+      <React.Fragment>
+        <div>
+          FOOTER
+        </div>
+      </React.Fragment>     
+    );
+  }
+}

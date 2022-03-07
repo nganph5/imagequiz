@@ -1,9 +1,13 @@
-const Header = () =>{
-  return(
-    <div>
-      HEADER
-    </div>
-  );
-}
+import React, { Component } from 'react';
 
-export default Header;
+export default class Header extends Component {
+  render(){
+    return(
+      <React.Fragment>
+         <div>
+          HEADER
+        </div>
+      </React.Fragment>     
+    );
+  }
+}

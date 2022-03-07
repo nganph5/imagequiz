@@ -1,9 +1,13 @@
-const Home = () =>{
-  return(
-    <div>
-      Hello from the home page!
-    </div>
-  );
-}
+import React, { Component } from 'react';
 
-export default Home;
+export default class Home extends Component {
+  render(){
+    return(
+      <React.Fragment>
+         <div>
+          HOME PAGE
+        </div>
+      </React.Fragment>     
+    );
+  }
+}
