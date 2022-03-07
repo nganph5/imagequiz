@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
@@ -12,6 +11,10 @@ import Footer from './components/Footer';
 import Menu from './components/Menu';
 
 const App = () => {
+  // let customerLoginHandler = () => {
+
+  // }
+
   return (
     <HashRouter>
       <Container fluid>
