@@ -11,41 +11,39 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Menu from './components/Menu';
 
-class App extends Component {
-  render() {
-    return (
-      <HashRouter>
-        <Container fluid>
-          <Row>
-            <Col>
-            <Header/>
-            </Col>
-          </Row>
-  
-          <Row>
-            <Col>
-            <Menu/>
-            </Col>
-          </Row>
-  
-          <Routes>  
-            <Route path="/register" element={<Register />}></Route>
-            
-            <Route path="/login" element={<Login />}></Route>
-            
-            <Route path="/" element={<Home />}></Route>
-          </Routes>
-  
-          <Row>
-            <Col>
-            <Footer/>
-            </Col>
-          </Row>
+const App = () => {
+  return (
+    <HashRouter>
+      <Container fluid>
+        <Row>
+          <Col>
+          <Header/>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col>
+          <Menu/>
+          </Col>
+        </Row>
+
+        <Routes>  
+          <Route exact path="/register" element={<Register />}></Route>
           
-        </Container>
-      </HashRouter>
-    );
-  }
+          <Route exact path="/login" element={<Login />}></Route>
+          
+          <Route exact path="/" element={<Home />}></Route>
+        </Routes>
+
+        <Row>
+          <Col>
+          <Footer/>
+          </Col>
+        </Row>
+        
+      </Container>
+    </HashRouter>
+  );
 }
 
 export default App;
