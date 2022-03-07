@@ -5,7 +5,7 @@ export default class Header extends Component {
     return(
       <React.Fragment>
          <div>
-          HEADER
+          This is the header.
         </div>
       </React.Fragment>     
     );

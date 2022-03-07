@@ -3,11 +3,7 @@ import React, { Component } from 'react';
 export default class Home extends Component {
   render(){
     return(
-      <React.Fragment>
-         <div>
-          HOME PAGE
-        </div>
-      </React.Fragment>     
+      <div>Welcome to the Image Quizz :)</div>
     );
   }
 }

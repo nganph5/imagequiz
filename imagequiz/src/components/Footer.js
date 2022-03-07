@@ -5,7 +5,7 @@ export default class Footer extends Component {
     return(
       <React.Fragment>
         <div>
-          FOOTER
+          This is the footer.
         </div>
       </React.Fragment>     
     );
