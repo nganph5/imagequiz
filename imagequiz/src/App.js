@@ -44,7 +44,7 @@ function App() {
           ></Route>
 
           <Route exact path="/" element={<Home />}></Route>
-          <Route exact path="/:flower" element={<Quizz />}></Route>
+          <Route exact path="/:i" element={<Quizz />}></Route>
         </Routes>
 
         <Row>

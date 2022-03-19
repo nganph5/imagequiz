@@ -5,21 +5,26 @@ import Col from "react-bootstrap/Col";
 import React from "react";
 import quizzes from "./data";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 function Home() {
   console.log(quizzes);
+  var i = 0;
   return (
     <div className="bg-dark">
       <Container fluid="md">
         <Row>
-          {flowers.map((flower) => (
-            <Col key={flower.name}>
-              <Link to={`${flower.name}`}>
-                <img src={flower.picture} alt={flower.name} />{" "}
-              </Link>
-              <div style={{ color: "white" }}>{flower.name}</div>
-            </Col>
-          ))}
+          {flowers.map(
+            (flower, i) => (
+              <Col key={flower.name}>
+                <Link to={`${i}`}>
+                  <img src={flower.picture} alt={flower.name} />{" "}
+                </Link>
+                <div style={{ color: "white" }}>{flower.name}</div>
+              </Col>
+            ),
+            (i = i + 1)
+          )}
         </Row>
       </Container>
     </div>
