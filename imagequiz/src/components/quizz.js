@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import quizzes from "./data";
 import { Container, Row, Col, Button } from "react-bootstrap";
+
 function Quizz() {
   const { i } = useParams();
   const id = parseInt(i, 10);

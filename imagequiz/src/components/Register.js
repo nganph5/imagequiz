@@ -2,7 +2,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import local_temp_store from '../data_access_layer/local_temp_storage';
+import APIAccess from '../communication/APIAccess';
 
 
 function Register() {
@@ -24,13 +24,23 @@ function Register() {
     }
 
     let onSubmitHandler = (e) =>{
-      local_temp_store.customers.push({name: name, email: email, passwd: passwd});
-      navigate("/login");
+      APIAccess.addCustomer(name, email, passwd)
+      .then(x => {
+        console.log(x);
+        if (x.done){
+          navigate("/login");
+        }else{
+          alert(x.message);
+        }
+      })
+      .catch(e => {
+        alert("Registration failed.");
+      })
     }
 
     return(
       <Form onSubmit={onSubmitHandler}>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className="mb-3" controlId="formBasicName">
             <Form.Label>Name</Form.Label>
             <Form.Control type="text" placeholder="Enter Name" value={name} onChange={onNameChanged}/>
           </Form.Group>

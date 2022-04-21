@@ -1,8 +1,9 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import local_temp_store from '../data_access_layer/local_temp_storage';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import APIAccess from '../communication/APIAccess';
+
 
 function Login(props) {
   const [email, setEmail] = useState('');
@@ -19,15 +20,18 @@ function Login(props) {
 
   let onSubmitHandler = (e) =>{
     e.preventDefault();
-    let found = local_temp_store.customers.find(x => 
-      (x.email.toLowerCase() === email.toLowerCase() && x.passwd === passwd));
-    if (found) {
-      props.customerLoggedIn(email);
-      navigate("/");
-    }else{
-      alert("Invalid credentials!");
-    }
-  }
+    APIAccess.login(email, passwd)
+    .then(x => {
+      if (x.done){
+        props.customerLoggedIn(email);
+        navigate("/");
+      }else{
+        alert(x.message);
+      }
+    }).catch(e => {
+      alert("Something went wrong!");
+    })
+}
 
   return(
     <Form onSubmit={onSubmitHandler}>
