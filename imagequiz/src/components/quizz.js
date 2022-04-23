@@ -34,20 +34,7 @@ function Quizz(props) {
             <p>The quizz end! Your score is {score}.</p>
             <EndQuiz quizTaker={props.customer} quizName={i} score={score}/>
           </Row>
-
-
-        // <h5>The quizz end! Your score is {score}.</h5>
         }
-        {/* {n < quizzes.questions.length && 
-          (props.customer ? APIAccess.addScore(props.customer,i,score)
-            .then(
-            res => {
-              console.log(res)
-            }) 
-          : <h5>Please log in to save your score.</h5>
-          )} */}
-
-
       </Container>
     </>
   ) : (<h5> Loading... </h5>);
