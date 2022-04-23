@@ -1,59 +1,107 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import quizzes from "./data";
 import { Container, Row, Col, Button } from "react-bootstrap";
+import APIAccess from '../communication/APIAccess';
 
-function Quizz() {
+function Quizz(props) {
+  const [quizzes, setQuizzes] = useState({});
   const { i } = useParams();
-  const id = parseInt(i, 10);
-  const name = quizzes[id].name;
-  const questions = quizzes[id].questions;
-  console.log(questions[0]);
   const [score, setScore] = useState(0);
   const [n, setN] = useState(0);
-  const [picture, setPicture] = useState(questions[n].picture);
-  const [choices, setChoices] = useState(questions[n].choices);
-  const [answer, setAnswer] = useState(questions[n].answer);
-  useEffect(() => {
-    setPicture(questions[n].picture);
-    setChoices(questions[n].choices);
-    setAnswer(questions[n].answer);
-  }, [id, n]);
 
-  function handleClick(i) {
-    if (n == 5) {
-      return;
-    }
-    if (i === answer) {
-      setScore(score + 1);
-      setN(n + 1);
-    } else {
-      setN(n + 1);
-    }
-  }
-  return (
+  useEffect(() => {
+    APIAccess.getQuizz(i).then(
+      res => {
+        setQuizzes(res.result);
+      }
+    )
+  },[i])
+
+  return Object.keys(quizzes).length > 0 ? (
     <>
       <Container>
+        {n < quizzes.questions.length ?
         <Row>
           <Col>
-            <div>Question {n + 1} / 6</div>
-            <div>Your score is: {score} / 6</div>
-
-            <img src={`${picture}`} />
+            <div>Question {n + 1} / {quizzes.questions.length}</div>
+            <div>Your score is: {score} / {quizzes.questions.length}</div>
           </Col>
-          <Col>
-            What is this flower?
-            <br />
-            {choices.map((i) => (
-              <div>
-                <Button onClick={() => handleClick(i)}>{i}</Button>{" "}
-              </div>
-            ))}
-          </Col>
+          <Quiz quiz={quizzes.questions[n]} n={n} setN={setN} score={score} setScore={setScore}/>
         </Row>
+        :
+          <Row>
+            <p>The quizz end! Your score is {score}.</p>
+            <EndQuiz quizTaker={props.customer} quizName={i} score={score}/>
+          </Row>
+
+
+        // <h5>The quizz end! Your score is {score}.</h5>
+        }
+        {/* {n < quizzes.questions.length && 
+          (props.customer ? APIAccess.addScore(props.customer,i,score)
+            .then(
+            res => {
+              console.log(res)
+            }) 
+          : <h5>Please log in to save your score.</h5>
+          )} */}
+
+
       </Container>
     </>
+  ) : (<h5> Loading... </h5>);
+}
+
+export const Quiz = ({quiz: {answer, choices, picture}, n, setN, score, setScore}) => {
+
+  const [clickedChoice, setClickedChoice] = useState('');
+
+  const onSubmit = (choice) => {
+    if (choice.toLowerCase().trim() === answer.toLowerCase().trim()) {
+      setScore(score + 1);
+    }
+    setN(n + 1);
+  }
+
+  return(
+    <div>
+      <Col>
+        What is this flower?
+        <br />
+        <img src={picture} alt='Some flower'/>
+        {choices.split(",").map((choice, key) => (
+          <div key={key}>
+            <input type="radio" id={choice} value={choice} name='choices' onChange={(e) => {
+              setClickedChoice(e.target.value);
+            }}/>
+            <label htmlFor={`${choice}${key}`}>{choice}</label><br></br>
+          </div>
+        ))}
+        <Button onClick={() => {
+          onSubmit(clickedChoice)
+        }}>Submit</Button>
+      </Col>
+    </div>
   );
 }
+
+export const EndQuiz = ({quizTaker, quizName, score}) => {  
+  const [stored, setStored] = useState(false);
+  
+  if (quizTaker.length > 0 && !stored){
+    APIAccess.addScore(quizTaker, quizName, score)
+    .then(
+    (res) => {
+      setStored(true);
+      // console.log(res);
+    })
+  } 
+
+  return stored ? (
+    <p>Score saved for user {quizTaker}.</p>
+  ) : (<p>Please log in to save your score.</p>);
+}
+
+
 export default Quizz;

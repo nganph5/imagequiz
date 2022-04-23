@@ -1,5 +1,5 @@
-// let backendAddress = 'http://localhost:4002'
-let backendAddress = 'https://nganph5-imagequiz-api.herokuapp.com'
+let backendAddress = 'http://localhost:4002'
+//let backendAddress = 'https://nganph5-imagequiz-api.herokuapp.com'
 
 let APIAccess = {
   addCustomer: (name, email, password) => {
@@ -38,6 +38,30 @@ let APIAccess = {
     .then(x => {
       return x;
     })
-  }
+  },
+
+  getQuizz: (name) => {
+    return fetch(`${backendAddress}/quiz/${name}`, {
+      method: 'Get'
+    })
+    .then(x => x.json())
+    .then(x => {
+      return x;
+    })
+  },
+
+  addScore: (quizTaker, quizName, score) => {
+    return fetch(`${backendAddress}/score`, {
+      method: 'Post',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({quizTaker, quizName, score})
+    })
+    .then(x => x.json())
+    .then(x => {
+      return x;
+    })
+  },
 }
 export default APIAccess;

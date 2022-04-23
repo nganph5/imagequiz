@@ -26,7 +26,6 @@ function Register() {
     let onSubmitHandler = (e) =>{
       APIAccess.addCustomer(name, email, passwd)
       .then(x => {
-        console.log(x);
         if (x.done){
           navigate("/login");
         }else{
