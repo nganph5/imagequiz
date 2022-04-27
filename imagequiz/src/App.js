@@ -1,8 +1,6 @@
 import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { Row, Col, Container } from "react-bootstrap";
 import Home from "./components/Home";
 import Register from "./components/Register";
 import Login from "./components/Login";
@@ -11,6 +9,7 @@ import Footer from "./components/Footer";
 import Menu from "./components/Menu";
 import Quizz from "./components/quizz";
 import { useState } from "react";
+import APIAccess from './communication/APIAccess';
 
 function App() {
   const [customer, setCustomer] = useState(localStorage.getItem('customer'));
@@ -60,7 +59,23 @@ function App() {
 
 const PrivateRoute = ({customer, children}) => {
   let isAuthenticated = localStorage.getItem('customer');
+  console.log(isAuthenticated);
   if (isAuthenticated){
+    
+    // e.preventDefault();
+    // APIAccess.login(email, passwd)
+    // .then(x => {
+    //   if (x.done){
+    //     props.customerLoggedIn(email);
+    //     navigate("/");
+    //   }else{
+    //     alert(x.message);
+    //   }
+    // }).catch(e => {
+    //   alert("Something went wrong!");
+    // })
+
+
     return children;
   }else{
     return <Navigate to='/login' />
