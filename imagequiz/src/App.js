@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -9,13 +9,14 @@ import Login from "./components/Login";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Menu from "./components/Menu";
-import Quizz from "./components/Quizz";
+import Quizz from "./components/quizz";
 import { useState } from "react";
 
 function App() {
-  const [customer, setCustomer] = useState("");
+  const [customer, setCustomer] = useState(localStorage.getItem('customer'));
 
   let customerLoggedInHandler = (customerEmail) => {
+    localStorage.setItem('customer', customerEmail);
     setCustomer(customerEmail);
   };
 
@@ -44,7 +45,7 @@ function App() {
           ></Route>
 
           <Route exact path="/" element={<Home />}></Route>
-          <Route exact path="/:i" element={<Quizz customer={customer}/>}></Route>
+          <Route exact path="/:i" element={<PrivateRoute><Quizz customer={customer}/></PrivateRoute>}></Route>
         </Routes>
 
         <Row>
@@ -55,6 +56,15 @@ function App() {
       </Container>
     </HashRouter>
   );
+}
+
+const PrivateRoute = ({customer, children}) => {
+  let isAuthenticated = localStorage.getItem('customer');
+  if (isAuthenticated){
+    return children;
+  }else{
+    return <Navigate to='/login' />
+  }
 }
 
 export default App;

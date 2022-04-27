@@ -19,8 +19,10 @@ let APIAccess = {
   login: (email, password) => {
     return fetch(`${backendAddress}/login`, {
       method: 'Post',
+      credentials: 'include',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Access-Control-Include-Credentials': true
       },
       body: JSON.stringify({email, password})
     })
@@ -32,7 +34,12 @@ let APIAccess = {
 
   getFlowers: () => {
     return fetch(`${backendAddress}/flowers`, {
-      method: 'Get'
+      method: 'Get',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Include-Credentials': true
+      }
     })
     .then(x => x.json())
     .then(x => {
@@ -42,10 +49,16 @@ let APIAccess = {
 
   getQuizz: (name) => {
     return fetch(`${backendAddress}/quiz/${name}`, {
-      method: 'Get'
+      method: 'Get',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Include-Credentials': true
+      }
     })
     .then(x => x.json())
     .then(x => {
+      console.log(x);
       return x;
     })
   },
