@@ -12,7 +12,7 @@ function Home() {
   useEffect(() => {
     APIAccess.getFlowers()
     .then(x => {
-      setFlowers(x.result);
+      setFlowers(x);
     })
     .catch(e => {
       console.log(e);

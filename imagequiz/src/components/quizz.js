@@ -13,9 +13,13 @@ function Quizz(props) {
   useEffect(() => {
     APIAccess.getQuizz(i).then(
       res => {
-        setQuizzes(res.result);
+        if(res.done){
+          setQuizzes(res.result);
+        }
       }
-    )
+    ).catch(e => {
+      alert("Can't load quiz. Make sure to log in first.")
+    })
   },[i])
 
   return Object.keys(quizzes).length > 0 ? (
