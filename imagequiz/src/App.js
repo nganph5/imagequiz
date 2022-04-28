@@ -14,7 +14,7 @@ import APIAccess from './communication/APIAccess';
 function App() {
   const [customer, setCustomer] = useState(localStorage.getItem('customer'));
 
-  let customerLoggedInHandler = (customerEmail) => {
+  let customerLoggedInHandler = (customerEmail, passwd) => {
     localStorage.setItem('customer', customerEmail);
     setCustomer(customerEmail);
   };
@@ -59,23 +59,7 @@ function App() {
 
 const PrivateRoute = ({customer, children}) => {
   let isAuthenticated = localStorage.getItem('customer');
-  console.log(isAuthenticated);
   if (isAuthenticated){
-    
-    // e.preventDefault();
-    // APIAccess.login(email, passwd)
-    // .then(x => {
-    //   if (x.done){
-    //     props.customerLoggedIn(email);
-    //     navigate("/");
-    //   }else{
-    //     alert(x.message);
-    //   }
-    // }).catch(e => {
-    //   alert("Something went wrong!");
-    // })
-
-
     return children;
   }else{
     return <Navigate to='/login' />
