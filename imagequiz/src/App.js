@@ -9,12 +9,11 @@ import Footer from "./components/Footer";
 import Menu from "./components/Menu";
 import Quizz from "./components/quizz";
 import { useState } from "react";
-import APIAccess from './communication/APIAccess';
 
 function App() {
   const [customer, setCustomer] = useState(localStorage.getItem('customer'));
 
-  let customerLoggedInHandler = (customerEmail, passwd) => {
+  let customerLoggedInHandler = (customerEmail) => {
     localStorage.setItem('customer', customerEmail);
     setCustomer(customerEmail);
   };
