@@ -32,6 +32,23 @@ let APIAccess = {
     })
   },
 
+
+  logout: () => {
+    return fetch(`${backendAddress}/logout`, {
+      method: 'Post',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Include-Credentials': true
+      },
+      body: JSON.stringify({})
+    })
+    .then(x => x.json())
+    .then(x => {
+      return x;
+    })
+  },
+
   getFlowers: () => {
     return fetch(`${backendAddress}/flowers`, {
       method: 'Get',
@@ -58,7 +75,6 @@ let APIAccess = {
     })
     .then(x => x.json())
     .then(x => {
-      console.log(x);
       return x;
     })
   },

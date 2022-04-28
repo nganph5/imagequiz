@@ -23,7 +23,7 @@ function Login(props) {
     APIAccess.login(email, passwd)
     .then(x => {
       if (x.done){
-        props.customerLoggedIn(email, passwd);
+        props.customerLoggedIn(email);
         navigate("/");
       }else{
         alert(x.message);

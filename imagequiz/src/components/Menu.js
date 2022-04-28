@@ -13,7 +13,9 @@ function Menu(props) {
           {props.customer ?
           <Navbar.Text>
             Signed in as {props.customer}
+            <Nav.Link href="#/logout">Log Out</Nav.Link>
           </Navbar.Text>
+          
           :
           <>
           <Nav.Link href="#/register">Register</Nav.Link>

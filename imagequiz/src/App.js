@@ -4,6 +4,7 @@ import { Row, Col, Container } from "react-bootstrap";
 import Home from "./components/Home";
 import Register from "./components/Register";
 import Login from "./components/Login";
+import Logout from "./components/Logout";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Menu from "./components/Menu";
@@ -29,7 +30,7 @@ function App() {
 
         <Row>
           <Col>
-            <Menu customer={customer} />
+            <Menu customer={customer} customerLoggedIn={customerLoggedInHandler} />
           </Col>
         </Row>
 
@@ -40,6 +41,12 @@ function App() {
             exact
             path="/login"
             element={<Login customerLoggedIn={customerLoggedInHandler} />}
+          ></Route>
+
+          <Route
+            exact
+            path="/logout"
+            element={<Logout customerLoggedIn={customerLoggedInHandler} />}
           ></Route>
 
           <Route exact path="/" element={<Home />}></Route>
