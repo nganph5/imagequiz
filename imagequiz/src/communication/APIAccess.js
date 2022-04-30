@@ -1,5 +1,5 @@
 //let backendAddress = 'http://localhost:4002'
-let backendAddress = 'https://nganph5-imagequiz-backend.herokuapp.com'
+let backendAddress = 'https://nganph5-imagequiz-api.herokuapp.com'
 
 let APIAccess = {
   addCustomer: (name, email, password) => {
@@ -60,7 +60,7 @@ let APIAccess = {
     })
     .then(x => x.json())
     .then(x => {
-      return x;
+      return x.result;
     })
   },
 
@@ -75,7 +75,7 @@ let APIAccess = {
     })
     .then(x => x.json())
     .then(x => {
-      return x;
+      return x.result;
     })
   },
 
