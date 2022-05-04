@@ -109,6 +109,7 @@ let APIAccess = {
   },
 
   isLoggedIn: () => {
+    console.log(`${backendAddress}/isloggedin`)
     return fetch(`${backendAddress}/isloggedin`, {
         method: 'Get',
         credentials: "include",
@@ -119,6 +120,7 @@ let APIAccess = {
      })
     .then(x => x.json())
     .then(x => {
+        console.log(x);
         return x.result;
     });
   }
