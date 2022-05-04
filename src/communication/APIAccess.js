@@ -1,5 +1,6 @@
-//let backendAddress = 'http://localhost:4002'
-let backendAddress = 'https://nganph5-imagequiz-api.herokuapp.com'
+import congifuration from '../configuration';
+
+let backendAddress = congifuration.backendAddress
 
 let APIAccess = {
   addCustomer: (name, email, password) => {
@@ -9,6 +10,21 @@ let APIAccess = {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({name, email, password})
+    })
+    .then(x => x.json())
+    .then(x => {
+      return x;
+    })
+  },
+
+  authGoogle: () => {
+    return fetch(`${backendAddress}/auth/google`, {
+      method: 'Get'
+      // ,credentials: 'include',
+      // headers: {
+      //   'Content-Type': 'application/json',
+      //   'Access-Control-Include-Credentials': true
+      // }
     })
     .then(x => x.json())
     .then(x => {
@@ -31,7 +47,6 @@ let APIAccess = {
       return x;
     })
   },
-
 
   logout: () => {
     return fetch(`${backendAddress}/logout`, {
@@ -92,5 +107,20 @@ let APIAccess = {
       return x;
     })
   },
+
+  isLoggedIn: () => {
+    return fetch(`${backendAddress}/isloggedin`, {
+        method: 'Get',
+        credentials: "include",
+        headers: {
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Credentials": true
+        }
+     })
+    .then(x => x.json())
+    .then(x => {
+        return x.result;
+    });
+  }
 }
 export default APIAccess;

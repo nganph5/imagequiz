@@ -15,7 +15,6 @@ function Home() {
       setFlowers(x);
     })
     .catch(e => {
-      console.log(e);
       alert('Something went wrong!');
     })
   }, [])

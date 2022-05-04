@@ -4,6 +4,7 @@ import { Row, Col, Container } from "react-bootstrap";
 import Home from "./components/Home";
 import Register from "./components/Register";
 import Login from "./components/Login";
+import FederatedLogin from './components/FederatedLogin';
 import Logout from "./components/Logout";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -19,6 +20,11 @@ function App() {
     setCustomer(customerEmail);
   };
 
+  let customerLoggedOutHandler = () => {
+    localStorage.removeItem('customer');
+    setCustomer(undefined);
+  }
+
   return (
     <HashRouter>
       <Container fluid>
@@ -30,26 +36,23 @@ function App() {
 
         <Row>
           <Col>
-            <Menu customer={customer} customerLoggedIn={customerLoggedInHandler} />
+            <Menu customer={customer} customerLoggedOut={customerLoggedOutHandler} />
           </Col>
         </Row>
 
         <Routes>
           <Route exact path="/register" element={<Register />}></Route>
 
-          <Route
-            exact
-            path="/login"
-            element={<Login customerLoggedIn={customerLoggedInHandler} />}
-          ></Route>
+          <Route path='/login/:from' element={<Login customerLoggedIn={customerLoggedInHandler} />}></Route>
+          
+          <Route path='/login' element={<Login customerLoggedIn={customerLoggedInHandler} />}></Route>
 
-          <Route
-            exact
-            path="/logout"
-            element={<Logout customerLoggedIn={customerLoggedInHandler} />}
-          ></Route>
+          <Route path='/google/:username/:name' element={<FederatedLogin provider="google" customerLoggedIn={customerLoggedInHandler} />}></Route>
+
+          <Route exact path="/logout" element={<Logout customerLoggedIn={customerLoggedInHandler} />}></Route>
 
           <Route exact path="/" element={<Home />}></Route>
+
           <Route exact path="/:i" element={<PrivateRoute><Quizz customer={customer}/></PrivateRoute>}></Route>
         </Routes>
 
