@@ -121,7 +121,7 @@ let APIAccess = {
     .then(x => x.json())
     .then(x => {
         console.log(x);
-        return x.result;
+        return x;
     });
   }
 }
