@@ -109,8 +109,8 @@ let APIAccess = {
   },
 
   isLoggedIn: () => {
-    console.log(`${backendAddress}/isloggedin`)
-    return fetch(`${backendAddress}/isloggedin`, {
+    console.log(`${backendAddress}/loggedin`)
+    return fetch(`${backendAddress}/loggedin`, {
         method: 'Get',
         credentials: "include",
         headers: {
